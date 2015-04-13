@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>LEGO Linnaläbimise timer</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
+		<link href="css/index.css" rel="stylesheet">
+
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap-switch.min.js"></script>
+		<script src="js/index.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-heading">Aeg</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="btn-group btn-group-justified" role="group">
+								<div class="btn-group" role="group">
+									<button type="button" class="btn btn-lg btn-success" onclick="startTimer();">Start</button>
+								</div>
+								<div class="btn-group" role="group">
+									<button type="button" class="btn btn-lg btn-danger" onclick="stopTimer();">Stop</button>
+								</div>
+								<div class="btn-group" role="group">
+									<button type="button" class="btn btn-lg btn-warning" onclick="resetTimer();">Reset</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h1 id="time"></h1>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+			<div class="col-md-4">
+			<div class="panel panel-default">
+				<!--<div class="panel-heading">Asukoht</div>-->
+				<table id="locations" class="table">
+					<tr>
+						<th>Asukoht</th>
+						<th class="minimize-col">Aeg</th>
+					</tr>
+				</table>
+			</div>
+			</div>
+
+			<div class="col-md-8">
+			<div class="panel panel-default">
+				<!--<div class="panel-heading">Penaltid</div>-->
+				<table id="penalties" class="table">
+					<tr>
+						<th>Penalt</th>
+						<th>Arv</th>
+						<th class="minimize-col">Aeg</th>
+					</tr>
+				</table>
+			</div>
+			</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">Kokku</div>
+				<table id="totals" class="table">
+					<tr>
+						<td id="total-loc" class="h3"></td>
+						<td id="total-loc-time"></td>
+					</tr>
+					<tr>
+						<td>Penaltid</td>
+						<td id="total-penalty-time"></td>
+					</tr>
+					<tr>
+						<td>Kokku</td>
+						<td id="total-time" class="h1"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
