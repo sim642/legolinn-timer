@@ -86,7 +86,7 @@ function resetButtons() {
 }
 
 function calcTimes() {
-	var totalLoc = '', totalLocTime = 0;
+	var totalLoc = '&nbsp;', totalLocTime = 0;
 	for (var li = locations.length - 1; li >= 0; li--) {
 		var lit = $('*[data-lit=' + li + ']');
 		if (lit.text() !== '') {
@@ -108,7 +108,7 @@ function calcTimes() {
 		$('td:last', tr).text(amount > 0 ? showTimeSec(amount) : '');
 	}
 
-	$('#total-loc').text(totalLoc);
+	$('#total-loc').html(totalLoc);
 	$('#total-loc-time').text(showTimeSec(totalLocTime));
 	$('#total-penalty-time').text(showTimeSec(totalPenaltyTime));
 	$('#total-time').text(showTimeSec(totalLocTime + totalPenaltyTime));
@@ -126,7 +126,9 @@ $(function() {
 	});
 
 	$('.loc-check').bootstrapSwitch({
-		inverse: true
+		inverse: true,
+		offColor: 'danger',
+		onColor: 'success'
 	}).on('switchChange.bootstrapSwitch', function(e, state) {
 		var lit = $('*[data-lit=' + $(this).attr('data-li') + ']');
 		var time = Date.now();
