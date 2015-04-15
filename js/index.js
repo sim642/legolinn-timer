@@ -1,4 +1,25 @@
-var locations = ['Foor', 'Ring', 'Parkla'];
+var locations = [
+	{
+		text: 'Foor',
+		x: 26.25,
+		y: 20.5
+	},
+	{
+		text: 'Ringristmik',
+		x: 36.5,
+		y: 11.75
+	},
+	{
+		text: 'Parkla 1',
+		x: 58.1,
+		y: 20.25
+	},
+	{
+		text: 'Parkla 2',
+		x: 63.5,
+		y: 20.25
+	}
+];
 var penalties = {
 	border: {
 		text: 'Tee piiri ületamine',
@@ -45,7 +66,7 @@ function startTimer() {
 	updateTimer();
 	stepper = setInterval(updateTimer, 1000);
 
-	$('.loc-check').bootstrapSwitch('disabled', false);
+	$('.loc-area').removeClass('disabled');
 	//$('#penalties input').attr('disabled', 'disabled').removeClass('disabled');
 }
 
@@ -56,7 +77,7 @@ function stopTimer() {
 	calcTimes();
 	//$('#totals').show();
 
-	$('.loc-check').bootstrapSwitch('disabled', true);
+	$('.loc-area').addClass('disabled');
 	//$('#penalties input').attr('disabled', 'disabled').addClass('disabled');
 }
 
@@ -71,9 +92,10 @@ function resetTimer() {
 function resetButtons() {
 	//$('#totals').hide();
 
-	$('.loc-check').bootstrapSwitch('disabled', false); // can't change state when disabled...
-	$('.loc-check').bootstrapSwitch('state', false);
-	$('.loc-check').bootstrapSwitch('disabled', true);
+	$('.loc-area').addClass('disabled').attr('data-time', '').removeClass('btn-success').addClass('btn-danger');
+	locations.forEach(function(location, li) {
+		$('.loc-area[data-li="' + li + '"]').text(location.text);
+	});
 
 	for (var pi in penalties) {
 		var div = $('#penalty-' + pi);
@@ -88,10 +110,10 @@ function resetButtons() {
 function calcTimes() {
 	var totalLoc = '&nbsp;', totalLocTime = 0;
 	for (var li = locations.length - 1; li >= 0; li--) {
-		var lit = $('*[data-lit=' + li + ']');
-		if (lit.text() !== '') {
-			totalLoc = locations[li];
-			totalLocTime = Math.round((parseInt(lit.attr('data-time')) - startTime) / 1000);
+		var $$ = $('.loc-area[data-li=' + li + ']');
+		if ($$.attr('data-time')) {
+			totalLoc = locations[li].text;
+			totalLocTime = Math.round((parseInt($$.attr('data-time')) - startTime) / 1000);
 			break;
 		}
 	}
@@ -116,24 +138,28 @@ function calcTimes() {
 
 $(function() {
 	locations.forEach(function(location, li) {
-		var tr = $('<tr></tr>');
+		var button = $('<button></button>').attr('type', 'button').addClass('btn btn-danger loc-area').attr('autocomplete', 'off').text(location.text);
+		button.css('left', location.x + 'em');
+		button.css('top', location.y + 'em');
 
-		var checkbox = $('<input></input>').attr('type', 'checkbox').addClass('loc-check').attr('data-label-text', location).attr('data-li', li);
-		tr.append($('<td></td>').append(checkbox));
-		tr.append($('<td></td>').attr('data-lit', li));
-
-		$('#locations').append(tr);
+		button.attr('data-li', li);
+		$('#map-panel').append(button);
 	});
 
-	$('.loc-check').bootstrapSwitch({
-		inverse: true,
-		offColor: 'danger',
-		onColor: 'success'
-	}).on('switchChange.bootstrapSwitch', function(e, state) {
-		var lit = $('*[data-lit=' + $(this).attr('data-li') + ']');
+	$('.loc-area').click(function() {
+		var $$ = $(this);
 		var time = Date.now();
-		lit.text(state ? showTimeDiff(time) : '');
-		lit.attr('data-time', time);
+
+		if ($$.attr('data-time')) { // active
+			$$.attr('data-time', '');
+			$$.text(locations[parseInt($$.attr('data-li'))].text);
+			$$.removeClass('btn-success').addClass('btn-danger');
+		}
+		else {
+			$$.attr('data-time', time);
+			$$.text(showTimeDiff(time));
+			$$.removeClass('btn-danger').addClass('btn-success');
+		}
 
 		calcTimes();
 	});

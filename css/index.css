@@ -1,3 +1,43 @@
 .minimize-col {
 	width: 1px;
 }
+
+#map-panel {
+	position: relative;
+}
+
+@media (max-width: 768px) { /* xs */
+	#map-panel {
+		font-size: 1.1725vw;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 992px) { /* sm */
+	#map-panel {
+		font-size: 63.1%;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1200px) { /* md */
+	#map-panel {
+		font-size: 82.4%;
+	}
+}
+
+@media (min-width: 1200px) { /* lg */
+	#map-panel {
+		font-size: 100%;
+	}
+}
+
+#map {
+	width: 100%;
+}
+
+.loc-area {
+	width: 5em;
+	height: 5em;
+	position: absolute;
+	opacity: 0.8;
+	font-size: inherit;
+}
