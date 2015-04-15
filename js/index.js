@@ -157,7 +157,7 @@ $(function() {
 		}
 		else {
 			$$.attr('data-time', time);
-			$$.text(showTimeDiff(time));
+			$$.html($('<span></span>').addClass('loc-time').text(showTimeDiff(time)));
 			$$.removeClass('btn-danger').addClass('btn-success');
 		}
 
