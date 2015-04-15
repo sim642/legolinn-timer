@@ -33,7 +33,7 @@ function showTimeSec(time) {
 }
 
 function showTimeDiff(time) {
-	return showTimeSec(startTime !== null ? Math.floor((time - startTime) / 1000) : 0);
+	return showTimeSec(startTime !== null ? Math.round((time - startTime) / 1000) : 0);
 }
 
 function updateTimer() {
@@ -91,7 +91,7 @@ function calcTimes() {
 		var lit = $('*[data-lit=' + li + ']');
 		if (lit.text() !== '') {
 			totalLoc = locations[li];
-			totalLocTime = Math.floor((parseInt(lit.attr('data-time')) - startTime) / 1000);
+			totalLocTime = Math.round((parseInt(lit.attr('data-time')) - startTime) / 1000);
 			break;
 		}
 	}
