@@ -27,12 +27,14 @@ var locations = [
 	{
 		text: 'Parkla 1',
 		x: 58.1,
-		y: 20.25
+		y: 20.25,
+		stops: true
 	},
 	{
 		text: 'Parkla 2',
 		x: 63.5,
-		y: 20.25
+		y: 20.25,
+		stops: true
 	}
 ];
 var penalties = {
@@ -164,16 +166,22 @@ $(function() {
 	$('.loc-area').click(function() {
 		var $$ = $(this);
 		var time = Date.now();
+		var location = locations[parseInt($$.attr('data-li'))];
 
 		if ($$.attr('data-time')) { // active
 			$$.attr('data-time', '');
-			$$.text(locations[parseInt($$.attr('data-li'))].text);
+			$$.text(location.text);
 			$$.removeClass('btn-success').addClass('btn-danger');
 		}
 		else {
 			$$.attr('data-time', time);
 			$$.html($('<span></span>').addClass('loc-time').text(showTimeDiff(time)));
 			$$.removeClass('btn-danger').addClass('btn-success');
+
+			if (location.stops) {
+				stopTimer();
+				return;
+			}
 		}
 
 		calcTimes();
