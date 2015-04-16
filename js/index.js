@@ -1,13 +1,28 @@
 var locations = [
 	{
+		text: 'Nurk',
+		x: 16.3,
+		y: 2
+	},
+	{
 		text: 'Foor',
 		x: 26.25,
 		y: 20.5
 	},
 	{
-		text: 'Ringristmik',
+		text: 'Ring',
 		x: 36.5,
 		y: 11.75
+	},
+	{
+		text: 'Pikem',
+		x: 46.1,
+		y: 0.75
+	},
+	{
+		text: 'Lühem',
+		x: 70,
+		y: 7.5
 	},
 	{
 		text: 'Parkla 1',
