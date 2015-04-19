@@ -187,6 +187,10 @@ $(function() {
 		calcTimes();
 	});
 
+	$('#map-rotate').click(function() {
+		$('#map-panel, .loc-area').toggleClass('rotated');
+	});
+
 	for (var pi in penalties) {
 		var tr = $('<tr></tr>').attr('id', 'penalty-' + pi);
 

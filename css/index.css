@@ -45,3 +45,13 @@
 .loc-time {
 	font-size: 200%;
 }
+
+#map-rotate {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+.rotated {
+	transform: rotate(180deg);
+}
