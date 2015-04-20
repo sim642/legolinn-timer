@@ -85,6 +85,8 @@ function startTimer() {
 
 	$('.loc-area').removeClass('disabled');
 	//$('#penalties input').attr('disabled', 'disabled').removeClass('disabled');
+
+	ga('send', 'event', 'control', 'timer', 'start');
 }
 
 function stopTimer() {
@@ -96,6 +98,8 @@ function stopTimer() {
 
 	$('.loc-area').addClass('disabled');
 	//$('#penalties input').attr('disabled', 'disabled').addClass('disabled');
+
+	ga('send', 'event', 'control', 'timer', 'stop', Math.round((Date.now() - startTime) / 1000));
 }
 
 function resetTimer() {
@@ -104,6 +108,8 @@ function resetTimer() {
 	updateTimer();
 	resetButtons();
 	calcTimes();
+
+	ga('send', 'event', 'control', 'timer', 'reset');
 }
 
 function resetButtons() {
@@ -172,6 +178,9 @@ $(function() {
 			$$.attr('data-time', '');
 			$$.text(location.text);
 			$$.removeClass('btn-success').addClass('btn-danger');
+
+
+			ga('send', 'event', 'location', 'unreach', location.text);
 		}
 		else {
 			$$.attr('data-time', time);
@@ -182,6 +191,8 @@ $(function() {
 				stopTimer();
 				return;
 			}
+
+			ga('send', 'event', 'location', 'reach', location.text, Math.round((time - startTime) / 1000));
 		}
 
 		calcTimes();
@@ -189,6 +200,8 @@ $(function() {
 
 	$('#map-rotate').click(function() {
 		$('#map-panel, .loc-area').toggleClass('rotated');
+
+		ga('send', 'event', 'control', 'map', 'rotate');
 	});
 
 	for (var pi in penalties) {
